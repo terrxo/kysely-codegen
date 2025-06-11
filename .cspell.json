@@ -20,6 +20,7 @@
     "deunionize",
     "dockercompose",
     "enumlabel",
+    "autoincrement",
     "enumtypid",
     "esbuild",
     "execa",
@@ -83,6 +84,7 @@
     "upvote",
     "varbinary",
     "varbit",
-    "vitest"
+    "vitest",
+    "terrxo"
   ]
 }

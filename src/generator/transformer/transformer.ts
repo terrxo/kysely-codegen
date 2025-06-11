@@ -333,10 +333,6 @@ const transformColumnToArgs = (
   const dataType = column.dataType.toLowerCase();
   const scalarNode = context.scalars[dataType];
 
-  if (scalarNode) {
-    return [scalarNode];
-  }
-
   // Used as a unique identifier for the data type:
   const dataTypeId = `${
     column.dataTypeSchema ?? context.defaultSchemas
@@ -383,8 +379,14 @@ const transformColumnToArgs = (
     return [node];
   }
 
+  // Check for column-level enum values (e.g., from CHECK constraints)
+  // This should come after database-level enum checks to preserve existing behavior
   if (column.enumValues) {
     return transformEnum(column.enumValues);
+  }
+
+  if (scalarNode) {
+    return [scalarNode];
   }
 
   return [context.defaultScalar];
